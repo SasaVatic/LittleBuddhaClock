@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Humble Buddha Clock</title>
+</head>
+<body>
+    <div class="filter">
+        <div class="clock">        
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="twelve-hours">12</div>
+            <div class="three-hours">3</div>
+            <div class="six-hours">6</div>
+            <div class="nine-hours">9</div>
+        </div>       
+        </div>
+    </div>
+    <!-- <audio autoplay loop >
+        <source src="./media/Relax.mp3" type="audio/mpeg">
+    </audio> -->
+</body>
+<script src="./jquery.ripples-min.js"></script>
+<script>
+    const secondHand = document.querySelector('.second-hand');
+
+    const minHand = document.querySelector('.min-hand');
+
+    const hourHand = document.querySelector('.hour-hand');
+
+    function setDate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60) * 360) + 90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        const mins = now.getMinutes();
+        const minsDegrees = ((mins / 60) * 360) + 90;
+        minHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+        const hours = now.getHours();
+        const hoursDegrees = ((hours / 12) * 360) + 90 + mins / 2;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    }
+    setInterval(setDate, 1000);
+
+    jQuery(document).ready(function(){
+
+        "use strict"
+
+        $('.filter').ripples({
+            dropRadius: 10,
+            perturbance: 0.01,
+            });
+    });
+
+    var song = new Audio("media\\Relax.mp3");
+    song.play();
+    song.loop = true;
+</script>
+</html>
